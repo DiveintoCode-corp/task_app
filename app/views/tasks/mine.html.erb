@@ -1,0 +1,29 @@
+<h1>マイタスク</h1>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-default' %>
+
+<div class="row">
+  <% @tasks.each do |task| %>
+    <div class="col-md-6 col-xs-12">
+      <div class="panel panel-primary">
+      	<div class="panel-heading">
+      		<%= task.title %>
+      	</div>
+      	<div class="panel-body">
+      		<%= task.content %>
+      		<p><%= task.deadline %></p>
+          <p><%= task.auther.name %></p>
+          <p><%= task.charger.name %></p>
+          <p><%= display_status(task.status) %></p>
+          <p>
+            <%= link_to 'Show', task, class: 'btn btn-default' %>
+            <% if task.charger == current_user %>
+              <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-info' %>
+              <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <% end %>
+          </p>
+      	</div>
+      </div>
+    </div>
+  <% end %>
+</div>
