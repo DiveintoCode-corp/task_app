@@ -46,7 +46,7 @@ class TasksController < ApplicationController
     @task.charge_id = current_user.id
     
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      redirect_to @task, notice: 'タスクが作成されました'
     else
       render :new
     end
@@ -61,7 +61,7 @@ class TasksController < ApplicationController
     end
     
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to @task, notice: 'タスクが更新されました'
     else
       render :edit
     end
@@ -74,7 +74,7 @@ class TasksController < ApplicationController
     end
     
     if @task.update(charge_id: params[:task][:charge_id])
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to @task, notice: 'タスクが新しくアサインされました'
     end
   end
 
@@ -87,7 +87,7 @@ class TasksController < ApplicationController
     end
     
     @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    redirect_to tasks_url, notice: 'タスクが削除されました'
   end
 
   private

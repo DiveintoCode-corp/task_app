@@ -16,12 +16,10 @@
   </div>
 <% end %>
 
-<div>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</div>
-
-<div>
-  <strong>Content:</strong>
-  <%= @task.content %>
+<div class="jumbotron">
+	<h1><%= @task.title %></h1>
+	<p><%= @task.content %></p>
+	<p>期限：<%= @task.deadline %></p>
+	<p>作成者：<%= @task.auther.name %></p>
+	<p>ステータス：<%= display_status(@task.status) %></p>
 </div>

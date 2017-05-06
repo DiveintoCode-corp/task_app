@@ -1,4 +1,4 @@
-<h1>Editing Task</h1>
+<h1>タスク編集</h1>
 
 <%= form_for(@task) do |f| %>
   <% if @task.errors.any? %>
@@ -37,8 +37,6 @@
   
   <div class="actions">
     <%= f.submit "更新する", class: 'btn btn-success' %>
+    <%= link_to '一覧へ戻る', tasks_path, class: 'btn btn-default' %>
   </div>
 <% end %>
-
-<%= link_to 'Show', @task, class: 'btn btn-info' %> |
-<%= link_to 'Back', tasks_path, class: 'btn btn-default' %>
