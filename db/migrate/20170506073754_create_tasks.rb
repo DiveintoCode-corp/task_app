@@ -4,8 +4,7 @@ class CreateTasks < ActiveRecord::Migration
       t.string :title
       t.text :content
       t.datetime :deadline
-      t.integer :auther_id
-      t.integer :charge_id
+      t.integer :user_id
       t.integer :status
 
       t.timestamps null: false

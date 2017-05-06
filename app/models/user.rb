@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
-  has_many :tasks, foreign_key: 'charge_id', dependent: :destroy
+  has_many :tasks, dependent: :destroy
 end

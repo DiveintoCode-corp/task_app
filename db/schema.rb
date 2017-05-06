@@ -20,8 +20,7 @@ ActiveRecord::Schema.define(version: 20170506073754) do
     t.string   "title"
     t.text     "content"
     t.datetime "deadline"
-    t.integer  "auther_id"
-    t.integer  "charge_id"
+    t.integer  "user_id"
     t.integer  "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

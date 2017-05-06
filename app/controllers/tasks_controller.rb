@@ -5,11 +5,11 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.where.not(status: 3)
   end
   
   def mine
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.where.not(status: 3)
   end
 
   # GET /tasks/1
@@ -26,14 +26,14 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
-    if @task.charge_id != current_user.id
+    if @task.user_id != current_user.id
       redirect_to tasks_url, alert: "タスクを編集できません"
     end
   end
   
   def assign
     @task = Task.find(params[:id])
-    if @task.charge_id != current_user.id
+    if @task.user_id != current_user.id
       redirect_to tasks_url, alert: "タスクを編集できません"
     end
   end
@@ -41,10 +41,8 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-    @task.auther_id = current_user.id
-    @task.charge_id = current_user.id
-    
+    @task = current_user.tasks.build(task_params)
+
     if @task.save
       redirect_to @task, notice: 'タスクが作成されました'
     else
@@ -56,7 +54,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
      @task = Task.find(params[:id])
-    if @task.charge_id != current_user.id
+    if @task.user_id != current_user.id
       redirect_to tasks_url, alert: "タスクを編集できません"
     end
     
@@ -69,7 +67,7 @@ class TasksController < ApplicationController
   
   def assign_update
     @task = Task.find(params[:id])
-    if @task.charge_id != current_user.id
+    if @task.user_id != current_user.id
       redirect_to tasks_url, alert: "タスクを編集できません"
     end
     
@@ -82,7 +80,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
      @task = Task.find(params[:id])
-    if @task.charge_id != current_user.id
+    if @task.user_id != current_user.id
       redirect_to tasks_url, alert: "タスクを編集できません"
     end
     

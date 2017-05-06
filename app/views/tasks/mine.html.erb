@@ -5,21 +5,24 @@
 <div class="row">
   <% @tasks.each do |task| %>
     <div class="col-md-6 col-xs-12">
-      <div class="panel panel-primary">
+    <% if task.deadline < Time.now %>
+      <div class="panel panel-danger">
+    <% else %>
+      <div class="panel panel-success">
+    <% end %>
       	<div class="panel-heading">
       		<%= task.title %>
       	</div>
       	<div class="panel-body">
       		<%= task.content %>
-      		<p><%= task.deadline %></p>
-          <p><%= task.auther.name %></p>
-          <p><%= task.charger.name %></p>
-          <p><%= display_status(task.status) %></p>
+      		<p>期限：<%= task.deadline.strftime("%Y年%m月%d日") %></p>
+          <p>担当者：<%= task.user.name %></p>
+          <p>ステータス：<%= display_status(task.status) %></p>
           <p>
-            <%= link_to 'Show', task, class: 'btn btn-default' %>
-            <% if task.charger == current_user %>
-              <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-info' %>
-              <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <%= link_to '詳細', task, class: 'btn btn-default' %>
+            <% if task.user == current_user %>
+              <%= link_to '編集', edit_task_path(task), class: 'btn btn-info' %>
+              <%= link_to '削除', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
             <% end %>
           </p>
       	</div>

@@ -3,12 +3,12 @@
 <%= form_for(@task, url: assign_update_task_path) do |f| %>
   <div class="col-md-6 col-xs-12">
     <p>現在アサインされているユーザ</p>
-    <p><%= @task.charger.name %></p>
+    <p><%= @task.user.name %></p>
   </div>
 
   <div class="col-md-6 col-xs-12">
     <p>新しくアサインするユーザ</p>
-    <%= f.collection_select :charge_id, User.all, :id, :name, {}, class: 'form-control' %>
+    <%= f.collection_select :user_id, User.all, :id, :name, {}, class: 'form-control' %>
   </div>
   
   <div class="actions">
@@ -20,6 +20,5 @@
 	<h1><%= @task.title %></h1>
 	<p><%= @task.content %></p>
 	<p>期限：<%= @task.deadline %></p>
-	<p>作成者：<%= @task.auther.name %></p>
 	<p>ステータス：<%= display_status(@task.status) %></p>
 </div>
